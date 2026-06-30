@@ -1,0 +1,11 @@
+#pragma once
+
+// WiFi credentials
+// Copy this file to config.h and fill in your values
+
+const char* home_ssid     = "YOUR_WIFI_SSID";
+const char* home_password = "YOUR_WIFI_PASSWORD";
+
+// Fallback AP (created when home WiFi is unreachable)
+const char* ap_ssid       = "CristmasTree";
+const char* ap_password   = "YOUR_AP_PASSWORD";

@@ -1,0 +1,19 @@
+# PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# Credentials (never commit)
+src/config.h
+
+# macOS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+build/
+dist/
+
+# Editors
+.vscode/
+*.swp
