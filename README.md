@@ -1,15 +1,9 @@
-![Header](header.png)
-
 <div align="center">
 
 # treeofshit
 
 **POV Christmas tree with ESP32-C3 and WS2812B**
 
-[![License](https://img.shields.io/badge/license-MIT-2C2C2C?style=for-the-badge&labelColor=1E1E1E)](LICENSE)
-[![ESP32-C3](https://img.shields.io/badge/ESP32--C3-RISC--V-2C2C2C?style=for-the-badge&logo=espressif&labelColor=1E1E1E)]()
-[![FastLED](https://img.shields.io/badge/FastLED-3.6-2C2C2C?style=for-the-badge&labelColor=1E1E1E)]()
-[![PlatformIO](https://img.shields.io/badge/PlatformIO-build-2C2C2C?style=for-the-badge&logo=platformio&labelColor=1E1E1E)]()
 
 </div>
 
@@ -26,6 +20,8 @@ Persistence-of-vision Christmas tree controller. A rotating arm with 5 WS2812B L
 
 ## ■ Stack
 
+<div align="center">
+
 | Component | Technology |
 |-----------|------------|
 | MCU | ESP32-C3 (RISC-V) |
@@ -35,14 +31,17 @@ Persistence-of-vision Christmas tree controller. A rotating arm with 5 WS2812B L
 | Sensor | Hall-effect (GPIO 4) |
 | Interface | Built-in HTTP web server |
 
-## ■ Wiring
+</div>
 
-| ESP32-C3 | Component |
-|----------|-----------|
-| GPIO 3 | WS2812B DIN |
-| GPIO 4 | Hall sensor |
-| 5V | LED VCC |
-| GND | Common GND |
+## ■ How It Works
+
+```
+1. Hall-effect sensor on GPIO 4 fires interrupts on each full rotation to track angular position.
+2. The MCU divides each rotation into 24 angular segments timed by those interrupts.
+3. FastLED renders the selected tree effect across the 5 POV LEDs for the current segment, animating offsets across cycles.
+4. The 6th LED (star, mounted on top) independently runs its own star-effect set.
+5. The built-in HTTP server serves a glassmorphism web UI; effect selection is applied immediately over WiFi.
+```
 
 ## ■ Usage
 
@@ -58,6 +57,19 @@ pio device monitor
 ```
 
 After flashing, connect to the ESP32's WiFi and open the web UI to switch between tree and star effects.
+
+## ■ Wiring
+
+<div align="center">
+
+| ESP32-C3 | Component |
+|----------|-----------|
+| GPIO 3 | WS2812B DIN |
+| GPIO 4 | Hall sensor |
+| 5V | LED VCC |
+| GND | Common GND |
+
+</div>
 
 ## ■ License
 
