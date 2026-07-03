@@ -1,15 +1,9 @@
-![Header](header.png)
-
 <div align="center">
 
 # treeofshit
 
 **POV-ёлка на ESP32-C3 и WS2812B**
 
-[![License](https://img.shields.io/badge/license-MIT-2C2C2C?style=for-the-badge&labelColor=1E1E1E)](LICENSE)
-[![ESP32-C3](https://img.shields.io/badge/ESP32--C3-RISC--V-2C2C2C?style=for-the-badge&logo=espressif&labelColor=1E1E1E)]()
-[![FastLED](https://img.shields.io/badge/FastLED-3.6-2C2C2C?style=for-the-badge&labelColor=1E1E1E)]()
-[![PlatformIO](https://img.shields.io/badge/PlatformIO-build-2C2C2C?style=for-the-badge&logo=platformio&labelColor=1E1E1E)]()
 
 </div>
 
@@ -28,7 +22,7 @@
 
 <div align="center">
 
-| Компонент | Technology |
+| Компонент | Технология |
 |-----------|------------|
 | MCU | ESP32-C3 (RISC-V) |
 | LED | WS2812B x6 (5 POV + 1 star) |
@@ -39,20 +33,17 @@
 
 </div>
 
-## ■ Подключение
+## ■ Как это работает
 
-<div align="center">
+```
+1. Датчик Холла на GPIO 4 генерирует прерывания при каждом полном обороте для отслеживания угловой позиции.
+2. МК делит каждый оборот на 24 угловых сегмента, отсчитываемых по этим прерываниям.
+3. FastLED рендерит выбранный эффект ёлки на 5 POV-светодиодах для текущего сегмента, анимируя смещения между оборотами.
+4. Шестой светодиод (звезда, закреплённая на вершине) независимо воспроизводит собственный набор эффектов звезды.
+5. Встроенный HTTP-сервер отдаёт glassmorphism веб-интерфейс; выбор эффекта применяется мгновенно по WiFi.
+```
 
-| ESP32-C3 | Component |
-|----------|-----------|
-| GPIO 3 | WS2812B DIN |
-| GPIO 4 | Hall sensor |
-| 5V | LED VCC |
-| GND | Common GND |
-
-</div>
-
-## ■ Запуск
+## ■ Использование
 
 ```bash
 # Сборка
@@ -66,6 +57,19 @@ pio device monitor
 ```
 
 После прошивки подключитесь к WiFi ESP32 и откройте веб-интерфейс для переключения эффектов ёлки и звезды.
+
+## ■ Подключение
+
+<div align="center">
+
+| ESP32-C3 | Компонент |
+|----------|-----------|
+| GPIO 3 | WS2812B DIN |
+| GPIO 4 | Hall sensor |
+| 5V | LED VCC |
+| GND | Common GND |
+
+</div>
 
 ## ■ Лицензия
 
